@@ -68,7 +68,7 @@ public class AppPanel extends JPanel implements ActionListener {
                         String fName = Utilities.getFileName((String) null, true);
                         ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
                         light = (Stoplight) is.readObject();
-                        view.setLight(light);
+                        view = new StoplightView(light);
                         is.close();
                     }
 
@@ -78,7 +78,7 @@ public class AppPanel extends JPanel implements ActionListener {
 
                 case "New": {
                     light = new Stoplight();
-                    view.setLight(light);
+                    view = new StoplightView(light);
                     break;
                 }
 

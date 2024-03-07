@@ -2,6 +2,8 @@ package mvc;
 import javax.swing.*;
 import stopLight.Stoplight;
 
+import java.awt.*;
+
 public class View extends JPanel implements Subscriber {
 
     protected Model model;
@@ -12,7 +14,6 @@ public class View extends JPanel implements Subscriber {
 
     @Override
     public void update() {
-        model.changed();
-        model.notifySubscribers();
+        repaint();
     }
 }
