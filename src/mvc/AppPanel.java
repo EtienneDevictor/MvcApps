@@ -1,6 +1,4 @@
 package mvc;
-import stopLight.Stoplight;
-import stopLight.StoplightView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,8 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AppPanel extends JPanel implements ActionListener {
     private Model model;
@@ -18,7 +14,6 @@ public class AppPanel extends JPanel implements ActionListener {
     private AppFactory app;
     private ControlPanel cpanel;
     private JFrame frame;
-
 
     public AppPanel(AppFactory factory) {
         System.out.println("AppPanel Created");
@@ -71,7 +66,11 @@ public class AppPanel extends JPanel implements ActionListener {
                         String fName = Utilities.getFileName((String) null, true);
                         ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
                         this.model = (Model) is.readObject();
-                        view = new View(this.model);
+                        this.remove(view);
+                        view = app.makeView(this.model);
+                        this.add(view);
+                        this.revalidate();
+                        this.repaint();
                         is.close();
                     }
 
@@ -81,7 +80,11 @@ public class AppPanel extends JPanel implements ActionListener {
 
                 case "New": {
                     this.model = app.makeModel();
-                    view = new View(this.model);
+                    this.remove(view);
+                    view = app.makeView(this.model);
+                    this.add(view);
+                    this.revalidate();
+                    this.repaint();
                     break;
                 }
 
@@ -106,18 +109,18 @@ public class AppPanel extends JPanel implements ActionListener {
         }
     }
 
-    protected void handleException(Exception e) {
-        Utilities.error(e);
+    public void display() {
+        this.repaint();
     }
 
-    public void display() {
-            System.out.println("display");
-            frame.repaint();
+    protected void handleException(Exception e) {
+        Utilities.error(e);
     }
 
     protected static class ControlPanel extends JPanel {
 
         static JPanel p = new JPanel();
+
         public ControlPanel() {
             System.out.println("Control Panel");
             setBackground(Color.PINK);
@@ -126,7 +129,6 @@ public class AppPanel extends JPanel implements ActionListener {
 
         public static void add(JButton button) {
             p.add(button);
-            p.repaint();
         }
     }
 
