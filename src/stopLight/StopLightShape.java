@@ -40,7 +40,6 @@ public class StopLightShape {
     }
 
     public void draw(Graphics2D gc) {
-        System.out.println("draw");
         Color oldColor = gc.getColor();
         gc.setColor(Color.WHITE);
         gc.fillRect(xc, yc, width, height);

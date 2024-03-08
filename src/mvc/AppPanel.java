@@ -9,30 +9,40 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppPanel extends JPanel implements ActionListener {
     private Model model;
     private View view;
     private AppFactory app;
+    private ControlPanel cpanel;
+    private JFrame frame;
+
 
     public AppPanel(AppFactory factory) {
+        System.out.println("AppPanel Created");
         app = factory;
         model = app.makeModel();
         view = app.makeView(model);
+        cpanel = new ControlPanel();
         this.setLayout((new GridLayout(1, 2)));
+        this.add(cpanel);
         this.add(view);
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container cp = frame.getContentPane();
-        cp.add(this);
         frame.setJMenuBar(createMenuBar());
         frame.setTitle(app.getTitle());
         frame.setSize(500, 300);
+        cp.add(this);
         frame.setVisible(true);
+
     }
 
     protected JMenuBar createMenuBar() {
+        System.out.println("Create Menu Bar");
         JMenuBar result = new JMenuBar();
         JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
         result.add(fileMenu);
@@ -47,10 +57,6 @@ public class AppPanel extends JPanel implements ActionListener {
         String cmmd = ae.getActionCommand();
         try {
             switch (cmmd) {
-                case "Change":
-                    this.model.changed();
-                    break;
-
                 case "Save": {
                     String fName = Utilities.getFileName((String) null, false);
                     ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
@@ -84,11 +90,6 @@ public class AppPanel extends JPanel implements ActionListener {
                     break;
                 }
 
-                case "About": {
-                    Utilities.inform(app.about());
-                    break;
-                }
-
                 case "Help": {
                     String[] cmmds = app.getHelp();
                     Utilities.inform(cmmds);
@@ -97,7 +98,7 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 default: {
-                    throw new Exception("Unrecognized command: " + cmmd);
+                    app.makeEditCommand(model, cmmd, this).execute();
                 }
             }
         } catch (Exception e) {
@@ -110,22 +111,22 @@ public class AppPanel extends JPanel implements ActionListener {
     }
 
     public void display() {
-
+            System.out.println("display");
+            frame.repaint();
     }
 
-    protected class ControlPanel extends JPanel {
+    protected static class ControlPanel extends JPanel {
 
-         static JPanel p = new JPanel();
+        static JPanel p = new JPanel();
         public ControlPanel() {
+            System.out.println("Control Panel");
             setBackground(Color.PINK);
-            JButton change = new JButton("Change");
-            change.addActionListener(AppPanel.this);
-            p.add(change);
-            //  add(p);
+            add(p);
         }
 
         public static void add(JButton button) {
             p.add(button);
+            p.repaint();
         }
     }
 
