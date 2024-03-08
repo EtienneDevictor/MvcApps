@@ -11,26 +11,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class AppPanel extends JPanel implements ActionListener {
-    private Stoplight light;
-    private ControlPanel controls;
-    private StoplightView view;
+    private Model model;
+    private View view;
     private AppFactory app;
 
     public AppPanel(AppFactory factory) {
-
-        light = new Stoplight();
-        view = new StoplightView(light);
-        controls = new ControlPanel();
+        app = factory;
+        model = app.makeModel();
+        view = app.makeView(model);
         this.setLayout((new GridLayout(1, 2)));
-        this.add(controls);
         this.add(view);
 
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container cp = frame.getContentPane();
         cp.add(this);
-        frame.setJMenuBar(this.createMenuBar());
-        frame.setTitle("Stoplight Simulator");
+        frame.setJMenuBar(createMenuBar());
+        frame.setTitle(app.getTitle());
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
@@ -39,9 +36,9 @@ public class AppPanel extends JPanel implements ActionListener {
         JMenuBar result = new JMenuBar();
         JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
         result.add(fileMenu);
-        JMenu editMenu = Utilities.makeMenu("Edit", new String[]{"Change"}, this);
+        JMenu editMenu = Utilities.makeMenu("Edit", app.getEditCommands(), this);
         result.add(editMenu);
-        JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
+        JMenu helpMenu = Utilities.makeMenu("Help", app.getHelp(), this);
         result.add(helpMenu);
         return result;
     }
@@ -51,13 +48,13 @@ public class AppPanel extends JPanel implements ActionListener {
         try {
             switch (cmmd) {
                 case "Change":
-                    light.change();
+                    this.model.changed();
                     break;
 
                 case "Save": {
                     String fName = Utilities.getFileName((String) null, false);
                     ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
-                    os.writeObject(this.light);
+                    os.writeObject(this.model);
                     os.close();
                     break;
                 }
@@ -67,8 +64,8 @@ public class AppPanel extends JPanel implements ActionListener {
                     if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
                         String fName = Utilities.getFileName((String) null, true);
                         ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
-                        light = (Stoplight) is.readObject();
-                        view = new StoplightView(light);
+                        this.model = (Model) is.readObject();
+                        view = new View(this.model);
                         is.close();
                     }
 
@@ -77,8 +74,8 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 case "New": {
-                    light = new Stoplight();
-                    view = new StoplightView(light);
+                    this.model = app.makeModel();
+                    view = new View(this.model);
                     break;
                 }
 
@@ -88,14 +85,12 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 case "About": {
-                    Utilities.inform("Cyberdellic Designs Turtle Graphics, 2021. All rights reserved.");
+                    Utilities.inform(app.about());
                     break;
                 }
 
                 case "Help": {
-                    String[] cmmds = new String[]{
-                            "Change: Changes stop light",
-                    };
+                    String[] cmmds = app.getHelp();
                     Utilities.inform(cmmds);
                     break;
 

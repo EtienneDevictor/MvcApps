@@ -14,6 +14,7 @@ public class View extends JPanel implements Subscriber {
 
     @Override
     public void update() {
+        System.out.println("update");
         repaint();
     }
 }
