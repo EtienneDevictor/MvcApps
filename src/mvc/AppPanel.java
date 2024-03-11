@@ -109,7 +109,8 @@ public class AppPanel extends JPanel implements ActionListener {
         Utilities.error(e);
     }
 
-    public void display() {
+    public void display()
+    {
 
     }
 
