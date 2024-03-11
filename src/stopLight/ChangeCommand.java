@@ -10,6 +10,7 @@ public class ChangeCommand extends Command {
 
     public void execute() {
         Stoplight light = (Stoplight)model;
+        System.out.println("change command");
         light.change();
     }
 

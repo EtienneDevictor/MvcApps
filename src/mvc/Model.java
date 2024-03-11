@@ -8,14 +8,6 @@ public abstract class Model extends Publisher implements Serializable {
     Boolean unsavedChanges = false;
     String fileName = null;
 
-
-//    protected PropertyChangeSupport mPcs =
-//            new PropertyChangeSupport(this);
-//
-//    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
-//        mPcs.firePropertyChange(propertyName, oldValue, newValue);
-//    }
-
     public void serializeModel(String filename) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
             out.writeObject(this);
@@ -37,7 +29,7 @@ public abstract class Model extends Publisher implements Serializable {
     public void changed() {
 
         unsavedChanges = true;
-
+        System.out.println("model");
         notifySubscribers();
 
     }

@@ -7,6 +7,7 @@ public class Command {
         this.model = model;
     }
     public void execute() {
+        System.out.println("reached");
         model.changed();
     }
 }

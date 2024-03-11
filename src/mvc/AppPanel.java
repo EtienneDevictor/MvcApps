@@ -49,6 +49,7 @@ public class AppPanel extends JPanel implements ActionListener {
             switch (cmmd) {
                 case "Change":
                     this.model.changed();
+                    this.view.update();
                     break;
 
                 case "Save": {
@@ -110,7 +111,7 @@ public class AppPanel extends JPanel implements ActionListener {
     }
 
     public void display() {
-
+        System.out.println("display");
     }
 
     protected class ControlPanel extends JPanel {

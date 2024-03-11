@@ -19,6 +19,8 @@ public class StoplightPanel extends AppPanel {
         AppFactory factory = new StoplightFactory();
         AppPanel panel = new StoplightPanel(factory);
         panel.display();
+        System.out.println("panel");
+
     }
 
 }
