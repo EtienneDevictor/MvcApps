@@ -13,6 +13,7 @@ public class StoplightPanel extends AppPanel {
         change = new JButton("Change");
         change.addActionListener(this);
         ControlPanel.add(change);
+        this.display();
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,4 @@
 package mvc;
-import stopLight.Stoplight;
-import stopLight.StoplightView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,25 +12,32 @@ public class AppPanel extends JPanel implements ActionListener {
     private Model model;
     private View view;
     private AppFactory app;
+    private ControlPanel cpanel;
+    private JFrame frame;
 
     public AppPanel(AppFactory factory) {
+        System.out.println("AppPanel Created");
         app = factory;
         model = app.makeModel();
         view = app.makeView(model);
+        cpanel = new ControlPanel();
         this.setLayout((new GridLayout(1, 2)));
+        this.add(cpanel);
         this.add(view);
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container cp = frame.getContentPane();
-        cp.add(this);
         frame.setJMenuBar(createMenuBar());
         frame.setTitle(app.getTitle());
         frame.setSize(500, 300);
+        cp.add(this);
         frame.setVisible(true);
+
     }
 
     protected JMenuBar createMenuBar() {
+        System.out.println("Create Menu Bar");
         JMenuBar result = new JMenuBar();
         JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
         result.add(fileMenu);
@@ -47,11 +52,6 @@ public class AppPanel extends JPanel implements ActionListener {
         String cmmd = ae.getActionCommand();
         try {
             switch (cmmd) {
-                case "Change":
-                    this.model.changed();
-                    this.view.update();
-                    break;
-
                 case "Save": {
                     String fName = Utilities.getFileName((String) null, false);
                     ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
@@ -66,7 +66,11 @@ public class AppPanel extends JPanel implements ActionListener {
                         String fName = Utilities.getFileName((String) null, true);
                         ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
                         this.model = (Model) is.readObject();
-                        view = new View(this.model);
+                        this.remove(view);
+                        view = app.makeView(this.model);
+                        this.add(view);
+                        this.revalidate();
+                        this.repaint();
                         is.close();
                     }
 
@@ -76,17 +80,16 @@ public class AppPanel extends JPanel implements ActionListener {
 
                 case "New": {
                     this.model = app.makeModel();
-                    view = new View(this.model);
+                    this.remove(view);
+                    view = app.makeView(this.model);
+                    this.add(view);
+                    this.revalidate();
+                    this.repaint();
                     break;
                 }
 
                 case "Quit": {
                     System.exit(0);
-                    break;
-                }
-
-                case "About": {
-                    Utilities.inform(app.about());
                     break;
                 }
 
@@ -98,7 +101,7 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 default: {
-                    throw new Exception("Unrecognized command: " + cmmd);
+                    app.makeEditCommand(model, cmmd, this).execute();
                 }
             }
         } catch (Exception e) {
@@ -106,23 +109,22 @@ public class AppPanel extends JPanel implements ActionListener {
         }
     }
 
+    public void display() {
+        this.repaint();
+    }
+
     protected void handleException(Exception e) {
         Utilities.error(e);
     }
 
-    public void display() {
-        System.out.println("display");
-    }
+    protected static class ControlPanel extends JPanel {
 
-    protected class ControlPanel extends JPanel {
+        static JPanel p = new JPanel();
 
-         static JPanel p = new JPanel();
         public ControlPanel() {
+            System.out.println("Control Panel");
             setBackground(Color.PINK);
-            JButton change = new JButton("Change");
-            change.addActionListener(AppPanel.this);
-            p.add(change);
-            //  add(p);
+            add(p);
         }
 
         public static void add(JButton button) {
@@ -130,7 +132,7 @@ public class AppPanel extends JPanel implements ActionListener {
         }
     }
 
-   // public static void main(String[] args) {
+    // public static void main(String[] args) {
     //    AppPanel app = new AppPanel();
     //}
 }
