@@ -1,5 +1,6 @@
 package ca;
 
+import java.awt.*;
 import java.util.*;
 import java.io.*;
 import mvc.*;
@@ -10,6 +11,9 @@ abstract class Cell extends Publisher implements Serializable {
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid = null;
     protected Cell partner = null;
+    private Color color = Color.GREEN;
+    private int status = 0;
+
 
 
     // choose a random neighbor as a partner
@@ -45,4 +49,11 @@ abstract class Cell extends Publisher implements Serializable {
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
 
+    public Color getColor() {
+        return this.color;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
 }
