@@ -2,8 +2,10 @@ package gameOfLife;
 
 import ca.Cell;
 
-public class LifeCell extends Cell {
+public class Agent extends Cell {
 
+    private int status = 0;
+    private int ambience = 8;
     public void Cell() {
 
     }
@@ -30,6 +32,7 @@ public class LifeCell extends Cell {
 
     @Override
     public void reset(boolean randomly) {
+
 
     }
 }
