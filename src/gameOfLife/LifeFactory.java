@@ -7,11 +7,11 @@ public class LifeFactory extends GridFactory {
 
     @Override
     public Model makeModel() {
-        return null;
+        return new LifeGrid();
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return "Game of Life";
     }
 }

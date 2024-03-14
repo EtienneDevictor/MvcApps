@@ -15,6 +15,7 @@ public class GridView  extends View {
 
     public GridView(Model model) {
         super(model);
+        cellViews = new CellView[((Grid)model).dim][((Grid)model).dim];
 
         this.setLayout((new GridLayout(((Grid)model).dim, ((Grid)model).dim)));
 
