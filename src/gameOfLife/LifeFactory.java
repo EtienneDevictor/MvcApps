@@ -7,7 +7,7 @@ public class LifeFactory extends GridFactory {
 
     @Override
     public Model makeModel() {
-        return new LifeGrid();
+        return new Society();
     }
 
     @Override
