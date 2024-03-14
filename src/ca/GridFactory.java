@@ -3,17 +3,10 @@ package ca;
 import mvc.*;
 import stopLight.ChangeCommand;
 
-public class GridFactory implements AppFactory {
+public abstract class GridFactory implements AppFactory {
 
     @Override
-    public Model makeModel() {
-        return new Grid() {
-            @Override
-            public Cell makeCell(boolean uniform) {
-                return null;
-            }
-        };
-    }
+    public abstract Model makeModel();
 
     @Override
     public View makeView(Model m) {
@@ -21,9 +14,7 @@ public class GridFactory implements AppFactory {
     }
 
     @Override
-    public String getTitle() {
-        return "CA Model";
-    }
+    public abstract String getTitle();
 
     @Override
     public String[] getHelp() {

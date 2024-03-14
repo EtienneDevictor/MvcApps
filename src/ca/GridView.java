@@ -3,11 +3,14 @@ package ca;
 import javax.swing.*;
 
 import mvc.*;
+import stopLight.StoplightFactory;
+import stopLight.StoplightPanel;
+
 import java.awt.*;
 
 public class GridView  extends View {
 
-    private CellView cellViews[][];
+    private CellView[][] cellViews;
 
 
     public GridView(Model model) {
@@ -26,19 +29,18 @@ public class GridView  extends View {
 
     //shu
     public void update(String msg, Object oldState, Object newState) {
-        for (int row = 0; row < ((Grid)model).getDim(); row++) {
-            for (int col = 0; col < ((Grid)model).getDim(); col++) {
+        for (int row = 0; row < ((Grid) model).getDim(); row++) {
+            for (int col = 0; col < ((Grid) model).getDim(); col++) {
                 CellView cellView = cellViews[row][col];
-                Cell cell = ((Grid)model).getCell(row, col);
-                //apparences
+                Cell cell = ((Grid) model).getCell(row, col);
+                //appearences
                 cellView.setBackground(cell.getColor());
                 cellView.setText(Integer.toString(cell.getStatus()));
 
             }
+        }
     }
 
     public void paintComponent() {
-
     }
-
 }
