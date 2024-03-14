@@ -8,4 +8,6 @@ public abstract class Command {
     }
     public void execute() {}
 
+    public void execute(String hi) {}
+
 }
