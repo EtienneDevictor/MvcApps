@@ -7,4 +7,7 @@ public abstract class Command {
         this.model = model;
     }
     public void execute() {}
+
+    public void execute(String hi) {}
+
 }

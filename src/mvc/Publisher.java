@@ -13,6 +13,7 @@ public class Publisher {
 
     public void notifySubscribers() {
         for (Subscriber s : subscribers) {
+            System.out.println("There is a subscriber here");
             s.update();
         }
     }

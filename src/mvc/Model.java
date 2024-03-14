@@ -15,7 +15,7 @@ public abstract class Model extends Publisher implements Serializable {
 //        mPcs.firePropertyChange(propertyName, oldValue, newValue);
 //    }
 
-//    public void serializeModel(String filename) {
+    //    public void serializeModel(String filename) {
 //        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
 //            out.writeObject(this);
 //        } catch (IOException e) {
