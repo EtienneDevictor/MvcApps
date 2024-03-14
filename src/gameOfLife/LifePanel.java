@@ -1,5 +1,6 @@
 package gameOfLife;
 
+import ca.Grid;
 import ca.GridFactory;
 import ca.GridPanel;
 import mvc.AppFactory;
@@ -8,19 +9,13 @@ import stopLight.StoplightFactory;
 import stopLight.StoplightPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class LifePanel extends GridPanel {
 
     private JButton change;
     public LifePanel(GridFactory factory) {
-
         super(factory);
-        change = new JButton("RUN1");
-        change.addActionListener(this);
-        ControlPanel.add(change);
-        change = new JButton("RUN50");
-        change.addActionListener(this);
-        ControlPanel.add(change);
         this.display();
     }
 
