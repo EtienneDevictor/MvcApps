@@ -3,6 +3,8 @@ package ca;
 import javax.swing.*;
 
 import mvc.*;
+import stopLight.StopLightShape;
+import stopLight.Stoplight;
 import stopLight.StoplightFactory;
 import stopLight.StoplightPanel;
 
@@ -43,5 +45,6 @@ public class GridView  extends View {
     }
 
     public void paintComponent() {
+
     }
 }
