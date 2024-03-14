@@ -1,4 +1,6 @@
 package mvc;
+import ca.Grid;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +14,7 @@ public class AppPanel extends JPanel implements ActionListener {
     private Model model;
     private View view;
     private AppFactory app;
-    private ControlPanel cpanel;
+    protected ControlPanel cpanel;
     private JFrame frame;
 
     public AppPanel(AppFactory factory) {
@@ -123,12 +125,15 @@ public class AppPanel extends JPanel implements ActionListener {
 
         public ControlPanel() {
             System.out.println("Control Panel");
-            setBackground(Color.PINK);
             add(p);
         }
 
         public static void add(JButton button) {
             p.add(button);
+        }
+
+        public static void setLayout(GridLayout gridLayout) {
+            p.setLayout(gridLayout);
         }
     }
 

@@ -1,5 +1,6 @@
 package gameOfLife;
 
+import ca.Grid;
 import ca.GridFactory;
 import ca.GridPanel;
 import mvc.AppFactory;
@@ -14,8 +15,6 @@ public class LifePanel extends GridPanel {
 
     private JButton change;
     public LifePanel(GridFactory factory) {
-
-
         super(factory);
         this.setLayout((new GridLayout(1, 2)));
         //this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
