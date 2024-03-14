@@ -36,7 +36,7 @@ public abstract class GridFactory implements AppFactory {
         if (type == "RUN1")
             return new RunCommand(model);
         else if (type == "RUN50")
-            return new RunCommand(model);
+            return new RunCommand50(model);
         else if (type == "POPULATE")
             return new PopulateCommand(model);
         else if (type == "CLEAR")
