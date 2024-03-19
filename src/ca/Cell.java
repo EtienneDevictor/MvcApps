@@ -53,6 +53,7 @@ public abstract class Cell extends Publisher implements Serializable {
         return this.color;
     }
 
+
     public int getStatus() {
         return this.status;
     }

@@ -19,8 +19,10 @@ public class CellView extends JButton implements ActionListener, Subscriber {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        myCell.nextState();
-        // call update needed?
+        myCell.nextState(); // changes the state of myCell
+        setBackground(myCell.getColor());
+        setBorder(BorderFactory.createLineBorder(Color.black));
+        setText("" + myCell.getStatus());
     }
 
     // called by notifySubscribers and GridView.update
