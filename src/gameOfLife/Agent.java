@@ -51,10 +51,10 @@ public class Agent extends Cell {
     public void update()
     {
         if (status == 1) {
-            if (Society.death.contains(ambience)) // Society.death.contains(ambience)
+            if (Society.death.contains(ambience))
                 status = 0;
         } else {
-            if (Society.rebirth.contains(ambience)) // Society.rebirth.contains(ambience)
+            if (Society.rebirth.contains(ambience))
                 status = 1;
         }
     }
