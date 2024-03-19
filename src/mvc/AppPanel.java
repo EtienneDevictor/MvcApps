@@ -128,9 +128,8 @@ public class AppPanel extends JPanel implements ActionListener {
             add(p);
         }
 
-        public static void add(JButton button) {
-            p.add(button);
-        }
+        public static void add(JButton button) {p.add(button);}
+
 
         public static void setLayout(GridLayout gridLayout) {
             p.setLayout(gridLayout);

@@ -11,7 +11,7 @@ public abstract class Cell extends Publisher implements Serializable {
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid = null;
     protected Cell partner = null;
-    private Color color = Color.GREEN;
+    protected Color color = Color.GREEN;
     private int status = 0;
 
 
