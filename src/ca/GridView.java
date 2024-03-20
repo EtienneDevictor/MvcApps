@@ -26,20 +26,25 @@ public class GridView  extends View {
                 CellView cell = new CellView(((Grid)model).getCell(row, col));
                 cellViews[row][col] = cell;
                 add(cell);
+                cell.update();
             }
         }
+        repaint();
     }
 
     //shu
     public void update(String msg, Object oldState, Object newState) {
+        System.out.print("Fuck");
+        update();
+    }
+
+    public void update() {
         for (int row = 0; row < ((Grid) model).getDim(); row++) {
             for (int col = 0; col < ((Grid) model).getDim(); col++) {
                 CellView cellView = cellViews[row][col];
                 Cell cell = ((Grid) model).getCell(row, col);
-                //appearences
                 cellView.setBackground(cell.getColor());
                 cellView.setText(Integer.toString(cell.getStatus()));
-
             }
         }
     }

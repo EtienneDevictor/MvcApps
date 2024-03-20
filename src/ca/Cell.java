@@ -12,7 +12,7 @@ public abstract class Cell extends Publisher implements Serializable {
     protected Grid myGrid = null;
     protected Cell partner = null;
     protected Color color = Color.GREEN;
-    private int status = 0;
+    protected int status = 0;
 
 
 

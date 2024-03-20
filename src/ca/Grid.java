@@ -27,6 +27,8 @@ public abstract class Grid extends Model {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 Cell cell = this.makeCell(true);
+                cell.row = row;
+                cell.col = col;
                 cells[row][col] = cell;
             }
         }
@@ -35,12 +37,15 @@ public abstract class Grid extends Model {
                 cells[row][col].neighbors = getNeighbors(cells[row][col], 1);
             }
         }
+        this.notifySubscribers();
     }
 
     // called when Populate button is clicked
         public void repopulate(boolean randomly) {
         for (int row = 0; row < dim; row++) {
+            System.out.println("repopulating");
             for (int col = 0; col < dim; col++) {
+                    System.out.printf("reset: %b \n", randomly);
                     cells[row][col].reset(randomly);
             }
         }
@@ -98,7 +103,8 @@ public abstract class Grid extends Model {
             update();
             observe();
             time++;
-            System.out.println("time = " + time);
+            notifySubscribers();
+            // System.out.println("time = " + time);
         }
     }
 }

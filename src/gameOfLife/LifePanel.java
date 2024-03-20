@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class LifePanel extends GridPanel {
 
-    private JButton change;
+
     public LifePanel(GridFactory factory) {
         super(factory);
         this.display();
@@ -22,7 +22,7 @@ public class LifePanel extends GridPanel {
 
     public static void main(String[] args) {
         GridFactory factory = new LifeFactory();
-        GridPanel panel = new LifePanel((LifeFactory)factory);
+        GridPanel panel = new LifePanel(factory);
         panel.display();
         System.out.println("panel");
     }
