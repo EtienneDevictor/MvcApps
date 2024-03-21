@@ -15,6 +15,7 @@ public class Agent extends Cell implements Subscriber {
 
     public Agent(Society society) {
         status = 1;
+        observe();
     }
 
     @Override
@@ -43,7 +44,6 @@ public class Agent extends Cell implements Subscriber {
 
     @Override
     public void update(String msq, Object object1, Object object2) {
-        update();
     }
     @Override
     public void update() {

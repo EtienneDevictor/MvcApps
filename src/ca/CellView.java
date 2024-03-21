@@ -39,7 +39,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     @Override
     public void update() {
         System.out.println("repainting cell");
-        setText("" + myCell.getStatus());
+        setText("" + myCell.getValue());
         this.repaint();
     }
 }
