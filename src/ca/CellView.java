@@ -19,9 +19,10 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     @Override
     public void actionPerformed(ActionEvent e) {
         myCell.nextState(); // changes the state of myCell
-        setBackground(myCell.getColor());
+        setBackground(myCell.color);
         setBorder(BorderFactory.createLineBorder(Color.black));
-        setText("" + myCell.getStatus());
+        setText("" + myCell.getValue());
+
         update();
     }
 
@@ -31,15 +32,15 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     public void update(String msg, Object oldState, Object newState) {
         setBackground(myCell.getColor());
         setBorder(BorderFactory.createLineBorder(Color.black)); // needed?
-        setText("" + myCell.getStatus());
+        setText("" + myCell.getValue());
         update();
     }
 
     @Override
     public void update() {
         System.out.println("repainting cell");
-        this.repaint()
-        ;
+        setText("" + myCell.getStatus());
+        this.repaint();
     }
 }
 

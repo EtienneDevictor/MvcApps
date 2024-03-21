@@ -29,6 +29,7 @@ public class GridView  extends View {
                 cell.update();
             }
         }
+
         repaint();
     }
 
@@ -44,7 +45,8 @@ public class GridView  extends View {
                 CellView cellView = cellViews[row][col];
                 Cell cell = ((Grid) model).getCell(row, col);
                 cellView.setBackground(cell.getColor());
-                cellView.setText(Integer.toString(cell.getStatus()));
+                cellView.setText(Integer.toString(cell.getValue()));
+                cellView.repaint();
             }
         }
     }

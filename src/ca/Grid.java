@@ -49,20 +49,27 @@ public abstract class Grid extends Model {
                     cells[row][col].reset(randomly);
             }
         }
-        notifySubscribers();
+
+        this.notifySubscribers();
+
     }
 
     public Set<Cell> getNeighbors(Cell asker, int radius) {
         Set<Cell> neighbors = new HashSet<>();
-        for (int row = asker.row - radius; row < asker.row + radius; row++) {
+        for (int row = asker.row - radius; row <= asker.row + radius; row++) {
             int tempRow = row >= 0 ? row : dim + row;
-            tempRow = tempRow <= dim - 1  ? tempRow : -dim + tempRow - 1;
-            for (int col =  asker.col - radius; col < asker.col + radius; col++){
+            tempRow = tempRow <= dim - 1  ? tempRow : -dim + tempRow;
+            for (int col =  asker.col - radius; col <= asker.col + radius; col++){
                 int tempCol = col >= 0 ? col : dim + col;
-                tempCol = tempCol <= dim - 1 ? tempCol :  -dim + tempCol - 1;
+                tempCol = tempCol <= dim - 1 ? tempCol :  -dim + tempCol;
+                if (asker.row == tempRow && asker.col == tempCol) {
+                }
+                else {
                 neighbors.add(cells[tempRow][tempCol]);
+                }
             }
         }
+        System.out.println("NEIGHBORS SIZE: " + neighbors.size());
         return neighbors;
     }
 
@@ -92,6 +99,7 @@ public abstract class Grid extends Model {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 cells[row][col].update();
+
             }
         }
     }
