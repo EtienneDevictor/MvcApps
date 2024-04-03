@@ -5,6 +5,8 @@ import simstation.Simulation;
 import simstation.SimulationPanel;
 
 public class RandomWalkSimulation extends Simulation {
+
+
     public void populate() {
         for(int i = 0; i < 15; i++)
             addAgent(new Drunk());

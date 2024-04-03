@@ -6,11 +6,9 @@ import mvc.Model;
 import mvc.View;
 import stopLight.ChangeCommand;
 
-abstract public class SimulationFactory implements AppFactory {
+public abstract class SimulationFactory implements AppFactory {
     @Override
-    public Model makeModel() {
-        return new Simulation();
-    }
+    public abstract Model makeModel();
 
     @Override
     public View makeView(Model m) {

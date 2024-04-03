@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Simulation extends Model {
+public abstract class Simulation extends Model {
 
-    private ArrayList<Agent> agents = new ArrayList<>();
+    protected ArrayList<Agent> agents = new ArrayList<>();
 
     private int clock = 0;
 

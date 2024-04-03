@@ -10,6 +10,7 @@ class Drunk extends Agent {
     public Drunk() {
         super();
         heading = Heading.random();
+
     }
 
     public void update() {

@@ -11,13 +11,15 @@ import java.util.Iterator;
 public class Agent implements Serializable, Runnable {
 
     private String name;
-    protected Header heading;
-    private int xc;
-    private int yx;
+    protected Heading heading;
+    protected int xc;
+    protected int yx;
     private boolean suspended = false;
     private boolean stopped = false;
     protected transient Thread thread;
-    @Override
+
+    private Simulation world;
+
     public void run() {
 
     }
@@ -25,6 +27,7 @@ public class Agent implements Serializable, Runnable {
     public void start() {
 
     }
+
 
     public void suspend() {
 
@@ -43,18 +46,33 @@ public class Agent implements Serializable, Runnable {
     }
 
     public void move(int steps) {
-
+        for (int i = 0; i < steps; i ++) {
+            if (Heading.direction == 1) {
+                xc += 1;
+            } else if (Heading.direction == 2) {
+                yx += -1;
+            } else if (Heading.direction == 3) {
+                xc += -1;
+            } else if (Heading.direction == 4) {
+                yx += 1;
+            }
+            world.changed();
+        }
     }
 
-    protected static class Header {
+    protected static class Heading {
 
-        int direction;
-        public Header() {
+        public static int direction;
+        static Heading test = new Heading();
+        public Heading() {
             int direction = 0;
         }
 
-        public void random() {
+        public static Heading random() {
             direction = Utilities.rng.nextInt(4);
+            return test;
+
+
         }
     }
 }
