@@ -1,6 +1,7 @@
 package simstation;
 
 import mvc.Model;
+import mvc.Publisher;
 import mvc.Utilities;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.util.Iterator;
 
-public class Agent implements Serializable, Runnable {
+public class Agent extends Publisher implements Serializable, Runnable {
 
     private String name;
     protected Heading heading;

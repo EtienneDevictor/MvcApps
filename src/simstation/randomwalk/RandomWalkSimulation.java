@@ -16,4 +16,5 @@ public class RandomWalkSimulation extends Simulation {
         AppPanel panel = new SimulationPanel(new RandomWalkFactory());
         panel.display();
     }
+
 }
