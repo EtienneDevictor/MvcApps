@@ -9,7 +9,10 @@ public class SuspendCommand extends Command {
     }
 
     @Override
-    public void execute() {
-
+    public void execute()
+    {
+        Simulation map = (Simulation)model;
+        System.out.println("Suspend command");
+        map.suspend();
     }
 }

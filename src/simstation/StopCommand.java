@@ -10,6 +10,9 @@ public class StopCommand extends Command {
 
     @Override
     public void execute() {
+        Simulation map = (Simulation)model;
+        System.out.println("Stop command");
+        map.stop();
 
     }
 }

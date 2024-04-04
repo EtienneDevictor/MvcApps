@@ -9,7 +9,11 @@ public class ResumeCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute()
+    {
+        Simulation map = (Simulation)model;
+        System.out.println("Resume command");
+        map.resume();
 
     }
 }

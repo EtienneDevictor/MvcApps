@@ -16,4 +16,5 @@ public class StartCommand extends Command {
         System.out.println("Start command");
         map.start();
     }
+
 }
